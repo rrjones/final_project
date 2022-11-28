@@ -4,6 +4,101 @@ author: "Rachel Jones"
 output: flexdashboard::flex_dashboard
 ---
 
+
+```{r}
+library(leaflet)
+library(plotly)
+library(readr)
+library(tidyverse)
+
+```
+
+
+```{r}
+# read in data
+plants <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-08-18/plants.csv")
+
+```
+
+
+```{r}
+# add ISO country codes for plotly
+plants <- plants %>% 
+  mutate(code = case_when(country == "Angola" ~ "AGO",
+                          country == "Argentina" ~ "ARG",
+                          country == "Australia" ~ "AUS",
+                          country == "Belgium" ~ "BEL",
+                          country == "Bermuda" ~ "BMU",
+                          country == "Bhutan" ~ "BTN",
+                          country == "Bolivia" ~ "BOL",
+                          country == "Brazil" ~ "BRA",
+                          country == "Burundi" ~ "BDI",
+                          country == "Cabo Verde" ~ "CPV",
+                          country == "Cameroon" ~ "CMR",
+                          country == "Canada" ~ "CAN",
+                          country == "Chile" ~ "CHL",
+                          country == "China" ~ "CHN",
+                          country == "Colombia" ~ "COL",
+                          country == "Congo" ~ "COG",
+                          country == "Cook Islands" ~ "COK",
+                          country == "Côte d'Ivoire" ~ "CIV",
+                          country == "Croatia" ~ "HRV",
+                          country == "Cuba" ~ "CUB",
+                          country == "Ecuador" ~ "ECU",
+                          country == "Ethiopia" ~ "ETH",
+                          country == "Fiji" ~ "FJI",
+                          country == "France" ~ "FRA",
+                          country == "French Polynesia" ~ "PYF",
+                          country == "Gabon" ~ "GAB",
+                          country == "Greece" ~ "GRC",
+                          country == "Guinea" ~ "GIN",
+                          country == "Haiti" ~ "HTI",
+                          country == "Honduras" ~ "HND",
+                          country == "India" ~ "IND",
+                          country == "Indonesia" ~ "IDN",
+                          country == "Italy" ~ "ITA",
+                          country == "Jamaica" ~ "JAM",
+                          country == "Kenya" ~ "KEN",
+                          country == "Madagascar" ~ "MDG",
+                          country == "Malaysia" ~ "MYS",
+                          country == "Mauritius" ~ "MUS",
+                          country == "Mexico" ~ "MEX",
+                          country == "Montserrat" ~ "MSR",
+                          country == "Mozambique" ~ "MOZ",
+                          country == "Myanmar" ~ "MMR",
+                          country == "Namibia" ~ "NAM",
+                          country == "New Caledonia" ~ "NCL",
+                          country == "New Zealand" ~ "NZL",
+                          country == "Nigeria" ~ "NGA",
+                          country == "Norfolk Island" ~ "NFK",
+                          country == "Panama" ~ "PAN",
+                          country == "Papua New Guinea" ~ "PNG",
+                          country == "Peru" ~ "PER",
+                          country == "Philippines" ~ "PHL",
+                          country == "Pitcairn" ~ "PCN",
+                          country == "Portugal" ~ "PRT",
+                          country == "Rwanda" ~ "RWA",
+                          country == "Saint Helena, Ascension and Tristan da Cunha" ~ "SHN",
+                          country == "Sao Tome and Principe" ~ "STP",
+                          country == "Seychelles" ~ "SYC",
+                          country == "South Africa" ~ "ZAF",
+                          country == "Spain" ~ "ESP",
+                          country == "Sri Lanka" ~ "LKA",
+                          country == "Swaziland" ~ "SWZ",
+                          country == "Taiwan" ~ "TWN",
+                          country == "Tanzania" ~ "TZA",
+                          country == "Trinidad and Tobago" ~ "TTO",
+                          country == "Uganda" ~ "UGA",
+                          country == "United Kingdom" ~ "GBR",
+                          country == "United States" ~ "USA",
+                          country == "Venezuela" ~ "VEN",
+                          country == "Viet Nam" ~ "VNM",
+                          country == "Yemen" ~ "YEM",
+                          country == "Zimbabwe" ~ "ZWE"))
+
+```
+
+
 Column {data-width = 600}
 -------------------------------------------------------------------------------
 
