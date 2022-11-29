@@ -6,6 +6,7 @@ output: flexdashboard::flex_dashboard
 
 
 ```{r}
+library(DT)
 library(plotly)
 library(readr)
 library(tidyverse)
@@ -23,78 +24,80 @@ plants <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesda
 ```{r}
 # add ISO country codes for plotly
 plants <- plants %>% 
-  mutate(code = case_when(country == "Angola" ~ "AGO",
-                          country == "Argentina" ~ "ARG",
-                          country == "Australia" ~ "AUS",
-                          country == "Belgium" ~ "BEL",
-                          country == "Bermuda" ~ "BMU",
-                          country == "Bhutan" ~ "BTN",
-                          country == "Bolivia" ~ "BOL",
-                          country == "Brazil" ~ "BRA",
-                          country == "Burundi" ~ "BDI",
-                          country == "Cabo Verde" ~ "CPV",
-                          country == "Cameroon" ~ "CMR",
-                          country == "Canada" ~ "CAN",
-                          country == "Chile" ~ "CHL",
-                          country == "China" ~ "CHN",
-                          country == "Colombia" ~ "COL",
-                          country == "Congo" ~ "COG",
-                          country == "Cook Islands" ~ "COK",
-                          country == "Côte d'Ivoire" ~ "CIV",
-                          country == "Croatia" ~ "HRV",
-                          country == "Cuba" ~ "CUB",
-                          country == "Ecuador" ~ "ECU",
-                          country == "Ethiopia" ~ "ETH",
-                          country == "Fiji" ~ "FJI",
-                          country == "France" ~ "FRA",
-                          country == "French Polynesia" ~ "PYF",
-                          country == "Gabon" ~ "GAB",
-                          country == "Greece" ~ "GRC",
-                          country == "Guinea" ~ "GIN",
-                          country == "Haiti" ~ "HTI",
-                          country == "Honduras" ~ "HND",
-                          country == "India" ~ "IND",
-                          country == "Indonesia" ~ "IDN",
-                          country == "Italy" ~ "ITA",
-                          country == "Jamaica" ~ "JAM",
-                          country == "Kenya" ~ "KEN",
-                          country == "Madagascar" ~ "MDG",
-                          country == "Malaysia" ~ "MYS",
-                          country == "Mauritius" ~ "MUS",
-                          country == "Mexico" ~ "MEX",
-                          country == "Montserrat" ~ "MSR",
-                          country == "Mozambique" ~ "MOZ",
-                          country == "Myanmar" ~ "MMR",
-                          country == "Namibia" ~ "NAM",
-                          country == "New Caledonia" ~ "NCL",
-                          country == "New Zealand" ~ "NZL",
-                          country == "Nigeria" ~ "NGA",
-                          country == "Norfolk Island" ~ "NFK",
-                          country == "Panama" ~ "PAN",
-                          country == "Papua New Guinea" ~ "PNG",
-                          country == "Peru" ~ "PER",
-                          country == "Philippines" ~ "PHL",
-                          country == "Pitcairn" ~ "PCN",
-                          country == "Portugal" ~ "PRT",
-                          country == "Rwanda" ~ "RWA",
-                          country == "Saint Helena, Ascension and Tristan da Cunha" ~ "SHN",
-                          country == "Sao Tome and Principe" ~ "STP",
-                          country == "Seychelles" ~ "SYC",
-                          country == "South Africa" ~ "ZAF",
-                          country == "Spain" ~ "ESP",
-                          country == "Sri Lanka" ~ "LKA",
-                          country == "Swaziland" ~ "SWZ",
-                          country == "Taiwan" ~ "TWN",
-                          country == "Tanzania" ~ "TZA",
-                          country == "Trinidad and Tobago" ~ "TTO",
-                          country == "Uganda" ~ "UGA",
-                          country == "Ukraine" ~ "UKR",
-                          country == "United Kingdom" ~ "GBR",
-                          country == "United States" ~ "USA",
-                          country == "Venezuela" ~ "VEN",
-                          country == "Viet Nam" ~ "VNM",
-                          country == "Yemen" ~ "YEM",
-                          country == "Zimbabwe" ~ "ZWE")) %>% 
+  mutate(code = 
+           case_when(country == "Angola" ~ "AGO",
+                     country == "Argentina" ~ "ARG",
+                     country == "Australia" ~ "AUS",
+                     country == "Belgium" ~ "BEL",
+                     country == "Bermuda" ~ "BMU",
+                     country == "Bhutan" ~ "BTN",
+                     country == "Bolivia" ~ "BOL",
+                     country == "Brazil" ~ "BRA",
+                     country == "Burundi" ~ "BDI",
+                     country == "Cabo Verde" ~ "CPV",
+                     country == "Cameroon" ~ "CMR",
+                     country == "Canada" ~ "CAN",
+                     country == "Chile" ~ "CHL",
+                     country == "China" ~ "CHN",
+                     country == "Colombia" ~ "COL",
+                     country == "Congo" ~ "COG",
+                     country == "Cook Islands" ~ "COK",
+                     country == "Côte d'Ivoire" ~ "CIV",
+                     country == "Croatia" ~ "HRV",
+                     country == "Cuba" ~ "CUB",
+                     country == "Ecuador" ~ "ECU",
+                     country == "Ethiopia" ~ "ETH",
+                     country == "Fiji" ~ "FJI",
+                     country == "France" ~ "FRA",
+                     country == "French Polynesia" ~ "PYF",
+                     country == "Gabon" ~ "GAB",
+                     country == "Greece" ~ "GRC",
+                     country == "Guinea" ~ "GIN",
+                     country == "Haiti" ~ "HTI",
+                     country == "Honduras" ~ "HND",
+                     country == "India" ~ "IND",
+                     country == "Indonesia" ~ "IDN",
+                     country == "Italy" ~ "ITA",
+                     country == "Jamaica" ~ "JAM",
+                     country == "Kenya" ~ "KEN",
+                     country == "Madagascar" ~ "MDG",
+                     country == "Malaysia" ~ "MYS",
+                     country == "Mauritius" ~ "MUS",
+                     country == "Mexico" ~ "MEX",
+                     country == "Montserrat" ~ "MSR",
+                     country == "Mozambique" ~ "MOZ",
+                     country == "Myanmar" ~ "MMR",
+                     country == "Namibia" ~ "NAM",
+                     country == "New Caledonia" ~ "NCL",
+                     country == "New Zealand" ~ "NZL",
+                     country == "Nigeria" ~ "NGA",
+                     country == "Norfolk Island" ~ "NFK",
+                     country == "Panama" ~ "PAN",
+                     country == "Papua New Guinea" ~ "PNG",
+                     country == "Peru" ~ "PER",
+                     country == "Philippines" ~ "PHL",
+                     country == "Pitcairn" ~ "PCN",
+                     country == "Portugal" ~ "PRT",
+                     country == "Rwanda" ~ "RWA",
+                     country == 
+                       "Saint Helena, Ascension and Tristan da Cunha" ~ "SHN",
+                     country == "Sao Tome and Principe" ~ "STP",
+                     country == "Seychelles" ~ "SYC",
+                     country == "South Africa" ~ "ZAF",
+                     country == "Spain" ~ "ESP",
+                     country == "Sri Lanka" ~ "LKA",
+                     country == "Swaziland" ~ "SWZ",
+                     country == "Taiwan" ~ "TWN",
+                     country == "Tanzania" ~ "TZA",
+                     country == "Trinidad and Tobago" ~ "TTO",
+                     country == "Uganda" ~ "UGA",
+                     country == "Ukraine" ~ "UKR",
+                     country == "United Kingdom" ~ "GBR",
+                     country == "United States" ~ "USA",
+                     country == "Venezuela" ~ "VEN",
+                     country == "Viet Nam" ~ "VNM",
+                     country == "Yemen" ~ "YEM",
+                     country == "Zimbabwe" ~ "ZWE")) %>% 
   relocate(code, .after = country)
 
 ```
@@ -135,12 +138,77 @@ plants_bycountry <- plants %>%
   full_join(threats, by = "code") %>% 
   full_join(actions, by = "code")
 
+# make column to contain "hover text"
 plants_bycountry <- plants_bycountry %>% 
   mutate(hover = with(plants_bycountry, 
                       paste(country, "<br>",
                             "no. plants:", n_plants, "<br>",
                             "no. threats:", n_threats, "<br>",
                             "no. actions:", n_actions)))
+
+```
+
+
+```{r}
+# add up threat types by continent for data table
+threats_bycontinent <- plants %>% 
+  select(continent, threat_AA:threat_NA) %>% 
+  pivot_longer(cols = threat_AA:threat_NA, 
+               names_to = "threat_type", values_to = "TF") %>% 
+  group_by(continent, threat_type) %>% 
+  mutate(threat_total = sum(TF)) %>% 
+  slice_head() %>% 
+  ungroup() %>% 
+  select(-TF) %>% 
+  mutate(threat_type = case_when(threat_type == "threat_AA" ~ 
+                                   "agriculture & aquaculture",
+                                 threat_type == "threat_BRU" ~ 
+                                   "biological resource use",
+                                 threat_type == "threat_RCD" ~
+                                   "commercial development",
+                                 threat_type == "threat_ISGD" ~
+                                   "invasive species",
+                                 threat_type == "threat_EPM" ~
+                                   "energy production & mining",
+                                 threat_type == "threat_CC" ~
+                                   "climate change",
+                                 threat_type == "threat_HID" ~
+                                   "human intrusions",
+                                 threat_type == "threat_P" ~
+                                   "pollution",
+                                 threat_type == "threat_TS" ~
+                                   "transportation corridor",
+                                 threat_type == "threat_NSM" ~
+                                   "natural system modifications",
+                                 threat_type == "threat_GE" ~
+                                   "geological events",
+                                 threat_type == "threat_NA" ~
+                                   "unknown threat")) %>% 
+  pivot_wider(names_from = continent, values_from = threat_total)
+
+# add up action types by continent for data table
+actions_bycontinent <- plants %>% 
+  select(continent, action_LWP:action_NA) %>% 
+  pivot_longer(cols = action_LWP:action_NA, 
+               names_to = "action_type", values_to = "TF") %>% 
+  group_by(continent, action_type) %>% 
+  mutate(action_total = sum(TF)) %>% 
+  slice_head() %>% 
+  ungroup() %>% 
+  select(-TF) %>% 
+  mutate(action_type = case_when(action_type == "action_LWP" ~
+                                   "land & water protection",
+                                 action_type == "action_SM" ~
+                                   "species management",
+                                 action_type == "action_LP" ~
+                                   "law & policy",
+                                 action_type == "action_RM" ~
+                                   "research & monitoring",
+                                 action_type == "action_EA" ~
+                                   "education & awareness",
+                                 action_type == "action_NA" ~
+                                   "unknown action")) %>% 
+  pivot_wider(names_from = continent, values_from = action_total)
 
 ```
 
@@ -171,6 +239,7 @@ Column {data-width = 400}
 ### Plot 2
 
 ```{r}
+
 
 ```
 
