@@ -5,7 +5,7 @@ output: flexdashboard::flex_dashboard
 ---
 
 
-```{r}
+```{r load_libraries}
 library(DT)
 library(plotly)
 library(readr)
@@ -14,14 +14,14 @@ library(tidyverse)
 ```
 
 
-```{r}
+```{r reading_in}
 # read in data
 plants <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-08-18/plants.csv")
 
 ```
 
 
-```{r}
+```{r ISO_codes}
 # add ISO country codes for plotly
 plants <- plants %>% 
   mutate(code = 
@@ -103,7 +103,7 @@ plants <- plants %>%
 ```
 
 
-```{r}
+```{r data_for_map}
 # get country list 
 countries <- plants %>% 
   select(country, code) %>% 
@@ -128,7 +128,7 @@ actions <- plants %>%
   summarize(n_actions = sum(TF)) %>% 
   ungroup()
 
-# basic descriptive info by country for map
+# set up basic descriptive info by country for map
 plants_bycountry <- plants %>% 
   group_by(code) %>% 
   summarize(n_plants = n()) %>% 
@@ -149,7 +149,37 @@ plants_bycountry <- plants_bycountry %>%
 ```
 
 
-```{r}
+```{r data_for_bubbleplot}
+# add up threats by continent
+threats_cont <- plants %>% 
+  select(continent, threat_AA:threat_NA) %>% 
+  pivot_longer(cols = threat_AA:threat_NA, 
+               names_to = "type", values_to = "TF") %>% 
+  group_by(continent) %>% 
+  summarize(n_threats = sum(TF)) %>% 
+  ungroup()
+
+# add up actions by continent
+actions_cont <- plants %>% 
+  select(continent, action_LWP:action_NA) %>% 
+  pivot_longer(cols = action_LWP:action_NA,
+               names_to = "type", values_to = "TF") %>% 
+  group_by(continent) %>% 
+  summarize(n_actions = sum(TF)) %>% 
+  ungroup()
+
+# set up basic descriptive info by continent for bubble plot
+plants_bycontinent <- plants %>% 
+  group_by(continent) %>% 
+  summarize(n_plants = n()) %>% 
+  ungroup() %>% 
+  mutate(n_threats = threats_cont$n_threats) %>% 
+  mutate(n_actions = actions_cont$n_actions)
+
+```
+
+
+```{r data_for_tables}
 # add up threat types by continent for data table
 threats_bycontinent <- plants %>% 
   select(continent, threat_AA:threat_NA) %>% 
@@ -218,7 +248,7 @@ Column {data-width = 600}
 
 ### Hover for additional info
 
-```{r}
+```{r make_map}
 # make interactive map
 map <- plot_ly(plants_bycountry, type = "choropleth", 
                locations = plants_bycountry$code, 
@@ -236,7 +266,7 @@ map
 Column {data-width = 400}
 -------------------------------------------------------------------------------
 
-### Plot 2
+### Hover for additional info
 
 ```{r}
 
@@ -244,6 +274,6 @@ Column {data-width = 400}
 ```
 
 
-### Explainer
+### README
 
 
