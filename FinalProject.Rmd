@@ -1,7 +1,9 @@
 ---
 title: "ERHS 535 Final Project"
 author: "Rachel Jones"
-output: flexdashboard::flex_dashboard
+output: 
+  flexdashboard::flex_dashboard:
+    theme: united
 ---
 
 
@@ -296,7 +298,7 @@ map <- plot_ly(plants_bycountry, type = "choropleth",
                z = plants_bycountry$n_plants,
                text = plants_bycountry$hover, 
                colors = "Greens") %>% 
-  colorbar(title = "Total extinct plants") %>% 
+  colorbar(title = "Total<br>extinct<br>plants") %>% 
   layout(title = "Global plant extinction<br>(IUCN Red List)")
 
 map
