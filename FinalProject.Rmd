@@ -305,7 +305,10 @@ bubbleplot
 - *toolbar:* When your mouse is over a figure, you can also access a toolbar in the top right corner of the figure that has widgets for adjusting zoom, resetting the view, saving an image, etc. 
 - *click and drag:* In the map, this action adjusts which region of the world you are viewing. In the bubble plot, this action zooms in to the rectangular region defined by the diagonal line you "draw".
 
-**On the second tab** (accessible via the top-of-page toolbar), you can explore the types of threats facing plants, and the types of actions taken to conserve them, on a per-continent basis.
+**On the second tab** (accessible via the top-of-page toolbar), you can explore the types of threats facing plants, and the types of actions taken to conserve them, on a per-continent basis. You can navigate the interactive features of these figures as follows:
+
+- *sort*: You can use the "up" and "down" arrows beside each column header to sort the table in ascending or descending order of the column variable.
+- *search:* You can search each table for a particular term.
 
 
 Tables
