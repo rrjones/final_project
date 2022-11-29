@@ -1,0 +1,3 @@
+This repo contains files for my FA22 ERHS 535 final project. `FinalProject.Rmd` contains all the code used to produce the flexdashboard. `FinalProject.html` is the final rendered flexdashboard. The flexdashboard consists of two tabs: "Figures" and "Tables". "Figures" contains interactive figures rendered using `plotly`. "Tables" contains interactive tables produced using `DT`. 
+
+Information about the data source for this project, as well as navigation and interpretation of all flexdashboard elements, is available in the "README" section in the lower right-hand corner of the "Figures" tab.
