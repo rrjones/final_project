@@ -281,6 +281,7 @@ Column {data-width = 400}
 
 ```{r make_bubbleplot}
 bubbleplot <- plot_ly(plants_bycontinent, 
+                      type = "scatter", mode = "markers",
                       x = ~n_plants, y = ~n_threats, 
                       size = ~n_actions, color = ~continent,
                       text = ~hover, 
