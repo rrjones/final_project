@@ -251,7 +251,7 @@ actions_bycontinent <- plants %>%
 ```
 
 
-Page 1
+Figures
 ===============================================================================
 
 Column {data-width = 600}
@@ -285,7 +285,7 @@ bubbleplot <- plot_ly(plants_bycontinent,
                       x = ~n_plants, y = ~n_threats, 
                       size = ~n_actions, color = ~continent,
                       text = ~hover, 
-                      marker = list(opacity = 0.4, sizemode = "diameter")) %>% 
+                      marker = list(opacity = 0.6, sizemode = "diameter")) %>% 
   layout(title = "Threats and actions by continent",
          xaxis = list(title = "Total number of extinct plants"),
          yaxis = list(title = "Total number of threats"))
@@ -297,8 +297,14 @@ bubbleplot
 
 ### README
 
+This flexdashboard is built from [a Tidy Tuesday dataset contributed by Florent Lavergne](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-08-18/readme.md). The underlying data comes from the International Union for Conservation (IUCN) Red List. 
 
-Page 2
+On this page, you can explore the global distribution of extinct plants and the correlation of plant extinction, threats to plants, and protective actions taken. (Note that there is no data available for many countries.) In both the figures on this page, you can hover over a plot element for more information. 
+
+On the next page, you can explore the types of threats facing plants, and the actions taken to conserve them, on a per-continent basis.
+
+
+Tables {data-orientation = rows}
 ===============================================================================
 
 Row {data-height = 500}
