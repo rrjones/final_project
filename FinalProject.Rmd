@@ -198,6 +198,22 @@ threats_bycontinent <- plants %>%
   slice_head() %>% 
   ungroup() %>% 
   select(-TF) %>% 
+  pivot_wider(names_from = continent, values_from = threat_total)
+
+# add up all threats of each type for globe
+threats_total <- plants %>% 
+  select(continent, threat_AA:threat_NA) %>% 
+  pivot_longer(cols = threat_AA:threat_NA, 
+               names_to = "threat_type", values_to = "TF") %>% 
+  group_by(threat_type) %>% 
+  mutate(Total = sum(TF)) %>%
+  slice_head() %>% 
+  ungroup() %>% 
+  select(-TF, -continent)
+
+# pull data together and make threat types more interpretable
+threats_bycontinent <- threats_bycontinent %>% 
+  full_join(threats_total, by = "threat_type") %>% 
   mutate(threat_type = case_when(threat_type == "threat_AA" ~ 
                                    "agriculture & aquaculture",
                                  threat_type == "threat_BRU" ~ 
@@ -221,8 +237,7 @@ threats_bycontinent <- plants %>%
                                  threat_type == "threat_GE" ~
                                    "geological events",
                                  threat_type == "threat_NA" ~
-                                   "unknown threat")) %>% 
-  pivot_wider(names_from = continent, values_from = threat_total)
+                                   "unknown threat"))
 
 # add up action types by continent for data table
 actions_bycontinent <- plants %>% 
@@ -234,6 +249,22 @@ actions_bycontinent <- plants %>%
   slice_head() %>% 
   ungroup() %>% 
   select(-TF) %>% 
+  pivot_wider(names_from = continent, values_from = action_total)
+
+# add up all actions of each type for globe
+actions_total <- plants %>% 
+  select(continent, action_LWP:action_NA) %>% 
+  pivot_longer(cols = action_LWP:action_NA, 
+               names_to = "action_type", values_to = "TF") %>% 
+  group_by(action_type) %>% 
+  mutate(Total = sum(TF)) %>%
+  slice_head() %>% 
+  ungroup() %>% 
+  select(-TF, -continent)
+
+# pull data together and make action types more interpretable
+actions_bycontinent <- actions_bycontinent %>% 
+  full_join(actions_total, by = "action_type") %>% 
   mutate(action_type = case_when(action_type == "action_LWP" ~
                                    "land & water protection",
                                  action_type == "action_SM" ~
@@ -245,8 +276,7 @@ actions_bycontinent <- plants %>%
                                  action_type == "action_EA" ~
                                    "education & awareness",
                                  action_type == "action_NA" ~
-                                   "unknown action")) %>% 
-  pivot_wider(names_from = continent, values_from = action_total)
+                                   "unknown action"))
 
 ```
 
@@ -257,7 +287,7 @@ Figures
 Column {data-width = 600}
 -------------------------------------------------------------------------------
 
-### Hover for additional info
+### Hover over countries for additional info
 
 ```{r make_map}
 # make interactive map
@@ -277,7 +307,7 @@ map
 Column {data-width = 400}
 -------------------------------------------------------------------------------
 
-### Hover for additional info
+### Hover over bubbles for additional info
 
 ```{r make_bubbleplot}
 bubbleplot <- plot_ly(plants_bycontinent, 
@@ -328,7 +358,8 @@ threat_dt <- datatable(threats_bycontinent,
                                     "Europe",
                                     "North America",
                                     "Oceania",
-                                    "South America"),
+                                    "South America",
+                                    "Total"),
                        rownames = FALSE,
                        extensions = "Scroller",
                        width = "100%",
@@ -355,7 +386,8 @@ action_dt <- datatable(actions_bycontinent,
                                     "Europe",
                                     "North America",
                                     "Oceania",
-                                    "South America"),
+                                    "South America",
+                                    "Total"),
                        rownames = FALSE,
                        extensions = "Scroller",
                        width = "100%",
