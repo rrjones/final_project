@@ -176,6 +176,14 @@ plants_bycontinent <- plants %>%
   mutate(n_threats = threats_cont$n_threats) %>% 
   mutate(n_actions = actions_cont$n_actions)
 
+# make column to contain "hover text"
+plants_bycontinent <- plants_bycontinent %>% 
+  mutate(hover = with(plants_bycontinent,
+                      paste(continent, "<br>",
+                            "no. plants:", n_plants, "<br>",
+                            "no. threats:", n_threats, "<br>",
+                            "no. actions:", n_actions)))
+
 ```
 
 
@@ -243,6 +251,9 @@ actions_bycontinent <- plants %>%
 ```
 
 
+Page 1
+===============================================================================
+
 Column {data-width = 600}
 -------------------------------------------------------------------------------
 
@@ -268,12 +279,43 @@ Column {data-width = 400}
 
 ### Hover for additional info
 
-```{r}
+```{r make_bubbleplot}
+bubbleplot <- plot_ly(plants_bycontinent, 
+                      x = ~n_plants, y = ~n_threats, 
+                      size = ~n_actions, color = ~continent,
+                      text = ~hover, 
+                      marker = list(opacity = 0.4, sizemode = "diameter")) %>% 
+  layout(title = "Threats and actions by continent",
+         xaxis = list(title = "Total number of extinct plants"),
+         yaxis = list(title = "Total number of threats"))
 
+bubbleplot
 
 ```
 
 
 ### README
 
+
+Page 2
+===============================================================================
+
+Row {data-height = 500}
+-------------------------------------------------------------------------------
+
+### Threats
+
+```{r}
+
+```
+
+
+Row {data-height = 500}
+-------------------------------------------------------------------------------
+
+### Actions
+
+```{r}
+
+```
 
