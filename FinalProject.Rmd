@@ -1,5 +1,5 @@
 ---
-title: "Final Project"
+title: "ERHS 535 Final Project"
 author: "Rachel Jones"
 output: flexdashboard::flex_dashboard
 ---
@@ -107,13 +107,40 @@ countries <- plants %>%
   arrange(code) %>% 
   unique()
 
-# basic descriptive info by country
+# add up threats by country
+threats <- plants %>% 
+  select(country, code, threat_AA:threat_NA) %>% 
+  pivot_longer(cols = threat_AA:threat_NA, 
+               names_to = "type", values_to = "TF") %>% 
+  group_by(code) %>% 
+  summarize(n_threats = sum(TF)) %>% 
+  ungroup()
+
+# add up actions by country
+actions <- plants %>% 
+  select(country, code, action_LWP:action_NA) %>% 
+  pivot_longer(cols = action_LWP:action_NA,
+               names_to = "type", values_to = "TF") %>% 
+  group_by(code) %>% 
+  summarize(n_actions = sum(TF)) %>% 
+  ungroup()
+
+# basic descriptive info by country for map
 plants_bycountry <- plants %>% 
   group_by(code) %>% 
   summarize(n_plants = n()) %>% 
   ungroup() %>% 
   mutate(country = countries$country) %>% 
-  relocate(country, .before = code)
+  relocate(country, .before = code) %>% 
+  full_join(threats, by = "code") %>% 
+  full_join(actions, by = "code")
+
+plants_bycountry <- plants_bycountry %>% 
+  mutate(hover = with(plants_bycountry, 
+                      paste(country, "<br>",
+                            "no. plants:", n_plants, "<br>",
+                            "no. threats:", n_threats, "<br>",
+                            "no. actions:", n_actions)))
 
 ```
 
@@ -121,10 +148,19 @@ plants_bycountry <- plants %>%
 Column {data-width = 600}
 -------------------------------------------------------------------------------
 
-### Plot 1
+### Hover for additional info
 
 ```{r}
+# make interactive map
+map <- plot_ly(plants_bycountry, type = "choropleth", 
+               locations = plants_bycountry$code, 
+               z = plants_bycountry$n_plants,
+               text = plants_bycountry$hover, 
+               colors = "Greens") %>% 
+  colorbar(title = "Total extinct plants") %>% 
+  layout(title = "Global plant extinction<br>(IUCN Red List)")
 
+map
 
 ```
 
