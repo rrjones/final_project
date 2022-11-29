@@ -331,7 +331,7 @@ bubbleplot
 
 ### README
 
-**About the data:** This flexdashboard is built from [a Tidy Tuesday dataset contributed by Florent Lavergne](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-08-18/readme.md) that describes extinct plants, ecological threats, and protective actions across the globe. The underlying data comes from the [International Union for Conservation (IUCN) Red List](https://www.iucnredlist.org/). It's important to note that data is not available for many countries, but I feel that plant biodiversity loss is a critical but understudied issue, making the data that is available very valuable.
+**About the data:** This flexdashboard is built from [a Tidy Tuesday dataset contributed by Florent Lavergne](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-08-18/readme.md) that describes extinct plants, ecological threats, and protective actions across the globe. The underlying data comes from the [International Union for Conservation (IUCN) Red List](https://www.iucnredlist.org/). It's important to note that data is not available for many countries, but given the critically important role of plants in sustaining life on Earth, the data that is available remains very valuable.
 
 **On this tab,** you can explore the global distribution of extinct plants, threats, and actions. The map at left displays total counts of extinct plants at the country level as a scale gradient. The bubble plot above displays the correlation of total threats and total extinct plants at the continent level, with bubble diameter a function of total number of actions. You can navigate the interactive features of these figures as follows:
 
