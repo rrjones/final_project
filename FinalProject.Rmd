@@ -6,7 +6,6 @@ output: flexdashboard::flex_dashboard
 
 
 ```{r}
-library(leaflet)
 library(plotly)
 library(readr)
 library(tidyverse)
@@ -89,12 +88,32 @@ plants <- plants %>%
                           country == "Tanzania" ~ "TZA",
                           country == "Trinidad and Tobago" ~ "TTO",
                           country == "Uganda" ~ "UGA",
+                          country == "Ukraine" ~ "UKR",
                           country == "United Kingdom" ~ "GBR",
                           country == "United States" ~ "USA",
                           country == "Venezuela" ~ "VEN",
                           country == "Viet Nam" ~ "VNM",
                           country == "Yemen" ~ "YEM",
-                          country == "Zimbabwe" ~ "ZWE"))
+                          country == "Zimbabwe" ~ "ZWE")) %>% 
+  relocate(code, .after = country)
+
+```
+
+
+```{r}
+# get country list 
+countries <- plants %>% 
+  select(country, code) %>% 
+  arrange(code) %>% 
+  unique()
+
+# basic descriptive info by country
+plants_bycountry <- plants %>% 
+  group_by(code) %>% 
+  summarize(n_plants = n()) %>% 
+  ungroup() %>% 
+  mutate(country = countries$country) %>% 
+  relocate(country, .before = code)
 
 ```
 
