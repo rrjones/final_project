@@ -345,10 +345,10 @@ bubbleplot
 - *search:* You can search each table for a particular term.
 
 
-Tables
+Tables {data-orientation=rows}
 ===============================================================================
 
-Column {data-width = 500}
+Row
 -------------------------------------------------------------------------------
 
 ### Threats
@@ -376,7 +376,7 @@ threat_dt
 ```
 
 
-Column {data-width = 500}
+Row
 -------------------------------------------------------------------------------
 
 ### Actions
