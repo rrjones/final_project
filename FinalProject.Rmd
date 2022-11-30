@@ -339,14 +339,25 @@ bubbleplot
 - *toolbar:* When your mouse is over a figure, you can also access a toolbar in the top right corner of the figure that has widgets for adjusting zoom, resetting the view, saving an image, etc. 
 - *click and drag:* In the map, this action adjusts which region of the world you are viewing. In the bubble plot, this action zooms in to the rectangular region defined by the diagonal line you "draw".
 
-**On the second tab** (accessible via the top-of-page toolbar), you can explore the types of threats facing plants, and the types of actions taken to conserve them, on a per-continent basis. You can navigate the interactive features of these figures as follows:
-
-- *sort*: You can use the "up" and "down" arrows beside each column header to sort the table in ascending or descending order of the column variable.
-- *search:* You can search each table for a particular term.
+**On the second tab** (accessible via the top-of-page toolbar), you can explore the broad types of threats facing plants, and the types of actions taken to conserve them. See the sidebar on that tab for navigation information. 
 
 
 Tables {data-orientation=rows}
 ===============================================================================
+
+Inputs {.sidebar}
+-------------------------------------------------------------------------------
+These tables contain data about **threats facing extinct plants (upper table)** and the **actions taken to protect plants (lower table)** on a per-continent basis. 
+
+At the world scale, the most common threat is *agriculture and aquaculture*; this threat is listed for `r round(227/sum(plants_bycontinent$n_plants), digits = 2)*100`% of assessed plants. On average, there are `r round(sum(threats_total$Total)/sum(plants_bycontinent$n_plants), digits = 2)` threats per extinct plant.
+
+In most cases where action is taken to protect a plant, the particular *type of action is unknown*. However, the most common known action type is land and water protection; this action is listed for `r round(65/sum(plants_bycontinent$n_plants), digits = 2)*100`% of assessed plants. On average, there are `r round(sum(actions_total$Total)/sum(plants_bycontinent$n_plants), digits = 1)` actions per extinct plant.
+
+You can navigate the interactive features of these tables as follows:
+
+- *sort*: You can use the "up" and "down" arrows beside each column header to sort the table in ascending or descending order of the column variable.
+- *search:* You can search each table for a particular term.
+
 
 Row
 -------------------------------------------------------------------------------
