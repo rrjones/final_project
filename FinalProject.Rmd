@@ -3,7 +3,7 @@ title: "ERHS 535 Final Project"
 author: "Rachel Jones"
 output: 
   flexdashboard::flex_dashboard:
-    theme: united
+    theme: bootstrap
 ---
 
 
@@ -235,7 +235,7 @@ threats_bycontinent <- threats_bycontinent %>%
                                  threat_type == "threat_TS" ~
                                    "transportation corridor",
                                  threat_type == "threat_NSM" ~
-                                   "natural system<br>modifications",
+                                   "natural system modifications",
                                  threat_type == "threat_GE" ~
                                    "geological events",
                                  threat_type == "threat_NA" ~
@@ -297,7 +297,7 @@ map <- plot_ly(plants_bycountry, type = "choropleth",
                locations = plants_bycountry$code, 
                z = plants_bycountry$n_plants,
                text = plants_bycountry$hover, 
-               colors = "BuPu") %>% 
+               colors = "YlGnBu") %>% 
   colorbar(title = "Total<br>extinct<br>plants",
            orientation = "h",
            y = 0) %>% 
