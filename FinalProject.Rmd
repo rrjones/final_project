@@ -235,7 +235,7 @@ threats_bycontinent <- threats_bycontinent %>%
                                  threat_type == "threat_TS" ~
                                    "transportation corridor",
                                  threat_type == "threat_NSM" ~
-                                   "natural system modifications",
+                                   "natural system<br>modifications",
                                  threat_type == "threat_GE" ~
                                    "geological events",
                                  threat_type == "threat_NA" ~
@@ -297,7 +297,7 @@ map <- plot_ly(plants_bycountry, type = "choropleth",
                locations = plants_bycountry$code, 
                z = plants_bycountry$n_plants,
                text = plants_bycountry$hover, 
-               colors = "Greens") %>% 
+               colors = "BuPu") %>% 
   colorbar(title = "Total<br>extinct<br>plants",
            orientation = "h",
            y = 0) %>% 
@@ -331,11 +331,11 @@ bubbleplot
 
 ### README
 
-**About the data:** This flexdashboard is built from [a Tidy Tuesday dataset contributed by Florent Lavergne](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-08-18/readme.md) that describes extinct plants, ecological threats, and protective actions across the globe. The underlying data comes from the [International Union for Conservation (IUCN) Red List](https://www.iucnredlist.org/). It's important to note that data is not available for many countries, but given the critically important role of plants in sustaining life on Earth, the data that is available remains very valuable.
+**About the data:** This flexdashboard is built from [a Tidy Tuesday dataset contributed by Florent Lavergne](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-08-18/readme.md) that describes extinct plants, ecological threats, and protective actions across the globe. The underlying data comes from the [International Union for Conservation (IUCN) Red List](https://www.iucnredlist.org/). It's important to note that this data comes with many gaps and limitations, but given the vital role of plants in sustaining life on Earth, the data that is available remains very valuable.
 
 **On this tab,** you can explore the global distribution of extinct plants, threats, and actions. The map at left displays total counts of extinct plants at the country level as a scale gradient. The bubble plot above displays the correlation of total threats and total extinct plants at the continent level, with bubble diameter a function of total number of actions. You can navigate the interactive features of these figures as follows:
 
-- *hover:* Put your mouse over over a figure element for more information about that element. 
+- *hover:* Put your mouse over a figure element for more information about that element. 
 - *toolbar:* When your mouse is over a figure, you can also access a toolbar in the top right corner of the figure that has widgets for adjusting zoom, resetting the view, saving an image, etc. 
 - *click and drag:* In the map, this action adjusts which region of the world you are viewing. In the bubble plot, this action zooms in to the rectangular region defined by the diagonal line you "draw".
 
