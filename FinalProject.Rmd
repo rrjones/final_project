@@ -8,13 +8,11 @@ output:
 
 
 ```{r load_libraries}
-library(broom)
 library(collapsibleTree)
 library(DT)
 library(plotly)
-library(purrr)
+library(RColorBrewer)
 library(readr)
-library(stringr)
 library(tidyverse)
 
 ```
@@ -460,20 +458,26 @@ tree <- collapsibleTree(plant_tree,
                                  rep("turquoise",
                                      length(unique(plant_tree$continent))),
                                  rep("lavender",
-                                     length(unique(plant_tree$country))),
-                                 rep("wheat",
-                                     length(unique(paste(plant_tree$country,
-                                                         plant_tree$group)))),
+                                     length(unique(paste(
+                                       plant_tree$continent, 
+                                       plant_tree$country)))),
+                                 rep("coral",
+                                     length(unique(paste(
+                                       plant_tree$continent, 
+                                       plant_tree$country,
+                                       plant_tree$group)))),
                                  rep("lemonchiffon",
-                                     length(unique(paste(plant_tree$country,
-                                                         plant_tree$genus)))),
-                                 rep("lightgreen",
-                                     length(unique(
-                                       paste(plant_tree$country,
-                                             plant_tree$binomial_name))))))
-
+                                     length(unique(paste(
+                                       plant_tree$continent, 
+                                       plant_tree$country,
+                                       plant_tree$genus)))),
+                                 rep("palegreen",
+                                     length(unique(paste(
+                                       plant_tree$continent,
+                                       plant_tree$country,
+                                       plant_tree$binomial_name))))))
+                        
 tree
 
 ```
-
 
