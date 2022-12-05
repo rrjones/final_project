@@ -446,7 +446,7 @@ add some info...
 Column
 -------------------------------------------------------------------------------
 
-### Click on nodes to expand tree
+### Click on nodes to expand & collapse tree
 
 ```{r make_tree}
 tree <- collapsibleTree(plant_tree,
@@ -455,7 +455,22 @@ tree <- collapsibleTree(plant_tree,
                                       "group",
                                       "genus",
                                       "binomial_name"),
-                        root = "World")
+                        root = "World",
+                        fill = c("skyblue",
+                                 rep("turquoise",
+                                     length(unique(plant_tree$continent))),
+                                 rep("lavender",
+                                     length(unique(plant_tree$country))),
+                                 rep("wheat",
+                                     length(unique(paste(plant_tree$country,
+                                                         plant_tree$group)))),
+                                 rep("lemonchiffon",
+                                     length(unique(paste(plant_tree$country,
+                                                         plant_tree$genus)))),
+                                 rep("lightgreen",
+                                     length(unique(
+                                       paste(plant_tree$country,
+                                             plant_tree$binomial_name))))))
 
 tree
 
