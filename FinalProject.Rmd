@@ -437,7 +437,20 @@ Tree
 
 Inputs {.sidebar}
 -------------------------------------------------------------------------------
-add some info...
+This interactive tree organizes the global list of extinct plants by **location**, **broad evolutionary group**, and **genus**. The levels of the tree are:
+
+1. root (blue)
+2. continent (turquoise)
+3. country (lavender)
+4. broad group (orange)
+5. genus (yellow)
+6. species (green)
+
+You can navigate the interactive features of this tree as follows:
+
+- *click on nodes:* Clicking on an un-expanded node (bold outline) expands the node. Clicking on an expanded node (narrow outline) collapses the node. 
+- *double click in plot area*: This action zooms in on the tree.
+- *click and drag:* This action adjusts which part of the tree you are viewing.
 
 
 
