@@ -358,6 +358,8 @@ bubbleplot
 
 **On the second tab** (accessible via the top-of-page toolbar), you can explore the broad types of threats facing plants, and the types of actions taken to conserve them. See the sidebar on that tab for navigation information. 
 
+**On the third tab** (accessible via the top-of-page toolbar), you can explore the specific genera and species of plants that have gone extinct in each country for which data is available. See the sidebar on that tab for navigation information.
+
 
 Tables {data-orientation=rows}
 ===============================================================================
