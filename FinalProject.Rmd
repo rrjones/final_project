@@ -8,9 +8,13 @@ output:
 
 
 ```{r load_libraries}
+library(broom)
+library(collapsibleTree)
 library(DT)
 library(plotly)
+library(purrr)
 library(readr)
+library(stringr)
 library(tidyverse)
 
 ```
@@ -283,6 +287,21 @@ actions_bycontinent <- actions_bycontinent %>%
 ```
 
 
+```{r data_for_tree}
+# get just needed data and arrange columns for collapsible tree
+plant_tree <- plants %>% 
+  select(binomial_name, country, continent, group) %>% 
+  mutate(binomial_temp = binomial_name) %>% 
+  separate(col = binomial_temp,
+           into = c("genus", "species"),
+           sep = "\\s") %>% 
+  select(-species) %>% 
+  relocate(binomial_name, .after = genus) %>% 
+  relocate(continent, .before = country)
+
+```
+
+
 Figures
 ===============================================================================
 
@@ -347,7 +366,7 @@ Tables {data-orientation=rows}
 
 Inputs {.sidebar}
 -------------------------------------------------------------------------------
-These tables contain data about **threats facing extinct plants (upper table)** and the **actions taken to protect plants (lower table)** on a per-continent basis. 
+These tables contain totals of **threats facing extinct plants (upper table)** and the **actions taken to protect plants (lower table)** on a per-continent basis. 
 
 You can navigate the interactive features of these tables as follows:
 
@@ -413,4 +432,33 @@ action_dt <- datatable(actions_bycontinent,
 action_dt
 
 ```
+
+
+Tree
+===============================================================================
+
+Inputs {.sidebar}
+-------------------------------------------------------------------------------
+add some info...
+
+
+
+Column
+-------------------------------------------------------------------------------
+
+### Click on nodes to expand tree
+
+```{r make_tree}
+tree <- collapsibleTree(plant_tree,
+                        hierarchy = c("continent",
+                                      "country",
+                                      "group",
+                                      "genus",
+                                      "binomial_name"),
+                        root = "World")
+
+tree
+
+```
+
 
