@@ -447,6 +447,8 @@ This interactive tree organizes the global list of extinct plants by **location*
 5. genus (yellow)
 6. species (green)
 
+The size of each node is proportional to the total number of nodes "downstream" from it. (For example, a larger "country" node generally means that relatively more plant species are listed as extinct in that country.)
+
 You can navigate the interactive features of this tree as follows:
 
 - *click on nodes:* Clicking on an un-expanded node (bold outline) expands the node. Clicking on an expanded node (narrow outline) collapses the node. 
@@ -468,6 +470,7 @@ tree <- collapsibleTree(plant_tree,
                                       "genus",
                                       "binomial_name"),
                         root = "World",
+                        nodeSize = "leafCount",
                         fill = c("skyblue",
                                  rep("turquoise",
                                      length(unique(plant_tree$continent))),
