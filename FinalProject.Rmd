@@ -337,8 +337,10 @@ bubbleplot <- plot_ly(plants_bycontinent,
                       text = ~hover, 
                       marker = list(opacity = 0.6, sizemode = "diameter")) %>% 
   layout(title = "Threats and actions by continent",
-         xaxis = list(title = "Total number of extinct plants"),
-         yaxis = list(title = "Total number of threats"))
+         xaxis = list(title = "Total number of extinct plants",
+                      showgrid = FALSE),
+         yaxis = list(title = "Total number of threats",
+                      showgrid = FALSE))
 
 bubbleplot
 
