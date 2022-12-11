@@ -26,6 +26,7 @@ plants <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesda
 
 ```{r ISO_codes}
 # add ISO country codes for plotly
+# source: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3
 plants <- plants %>% 
   mutate(code = 
            case_when(country == "Angola" ~ "AGO",
